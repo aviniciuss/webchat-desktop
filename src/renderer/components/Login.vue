@@ -35,7 +35,7 @@
                         this.$store.dispatch('changeUser', user)
                         this.$socket.emit('agent-connected', user)
 
-                        this.$router.push('/app')
+                        this.$router.push('/')
                     })
                     .catch((error) => {
                         console.log(error)
