@@ -1,44 +1,34 @@
 <template>
   <div id="app">
     <v-app>
-      <toolbar></toolbar>
-      <main>
-        <v-container fluid>
-            <router-view></router-view>
-        </v-container>
-      </main>
+      <router-view></router-view>
     </v-app>
   </div>
 </template>
 
 <script>
-  import Toolbar from './components/Toolbar'
-
   export default {
     name: 'webchat-desktop',
-    components: {
-      Toolbar
-    },
     methods: {
-      isNotLogged() {
-        return !this.$storage.getItem('webchat_token')
+      isLogged () {
+        const profile = this.getProfile()
+        if(profile) {
+          return profile.token
+        }
+        return false
+      },
+      getProfile () {
+        return JSON.parse(this.$storage.getItem('webchat_profile'))
       }
     },
-    sockets: {
-      'ping-agents': function() {
-          if(this.$storage.getItem('webchat_token')) {
-            this.$socket.emit('agent-connected', this.$store.state.user)
-          }
-      }
-    },
-    mounted() {
-      if(this.isNotLogged()) {
+    mounted () {
+      if(!this.isLogged()) {
         this.$router.push('/login')
       } else {
-        const user = this.$storage.getItem('webchat_user')
-        this.$store.dispatch('changeUser', JSON.parse(user))
+        const profile = this.getProfile()
+        this.$store.dispatch('changeUser', profile)
       }
-    },
+    }
   }
 </script>
 

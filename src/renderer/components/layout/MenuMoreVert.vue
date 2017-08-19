@@ -16,8 +16,7 @@
         name: 'MenuMoreVert',
         methods: {
             logout() {
-                this.$storage.removeItem('webchat_token')
-                this.$storage.removeItem('webchat_user')
+                this.$storage.removeItem('webchat_profile')
                 
                 this.$socket.emit('agent-disconnected', this.$store.state.user)
                 this.$store.dispatch('changeUser', {})

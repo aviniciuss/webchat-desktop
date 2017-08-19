@@ -2,7 +2,8 @@ export default {
     user: {
         name: '',
         email: '',
-        avatar: ''
+        avatar: '',
+        token: ''
     },
     appname: ''
 }

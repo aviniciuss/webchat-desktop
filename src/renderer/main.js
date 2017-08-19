@@ -11,7 +11,7 @@ Vue.use(Vuetify)
 Vue.use(VueSocketio, 'http://localhost:3000')
 
 if (!process.env.IS_WEB) Vue.use(require('vue-electron'))
-Vue.http = Vue.prototype.$http = axios
+Vue.http = Vue.prototype.$http = axios.create({ baseURL: 'http://localhost:8000' })
 Vue.storage = Vue.prototype.$storage = window.sessionStorage
 Vue.config.productionTip = false
 

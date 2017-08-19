@@ -11,7 +11,7 @@ const router = new Router({
     },
     {
       path: '/',
-      component: require('@/App.vue')
+      component: require('@/components/Main.vue')
     },
     {
       path: '*',
